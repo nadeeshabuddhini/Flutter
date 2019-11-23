@@ -6,14 +6,14 @@ class LoginPage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 100.0, right: 20.0),
+        padding: EdgeInsets.only(top: 40.0, right: 10.0, left:10.0, bottom:5.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
             'Welcome to',
             style: TextStyle(
-              fontSize: 40.0,
+              fontSize: 30.0,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -21,11 +21,11 @@ class LoginPage extends StatelessWidget {
           Text(
             "STUDENT ATTENDANCE SYSTEM",
             style: TextStyle(
-              fontSize: 32.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 40.0,),
+          SizedBox(height: 20.0,),
           buildTextField("Email"),
           SizedBox(height: 20.0,),
           buildTextField("Password"),
