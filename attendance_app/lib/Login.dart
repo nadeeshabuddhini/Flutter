@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 class Login extends StatelessWidget {
+  String _selectedUser = null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -7,9 +10,10 @@ class Login extends StatelessWidget {
         title: Text('Sign in'),
     ),
     body: Container(
-      padding: EdgeInsets.only(left:30.0,top: 10.0),
-    child: Column(
-      crossAxisAlignment:CrossAxisAlignment.center,
+      padding: EdgeInsets.only(left:20.0,top: 30.0),
+    child:SingleChildScrollView(
+    child:Column(
+      mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
     Text(
     'Welcome to',
@@ -18,7 +22,7 @@ class Login extends StatelessWidget {
     fontWeight: FontWeight.bold,
     ),
     ),
-    SizedBox(height: 10.0,),
+    SizedBox(height: 20.0,),
       Column(
         children: <Widget>[
           Container(
@@ -38,7 +42,7 @@ class Login extends StatelessWidget {
           ),
         ],
       ),
-    SizedBox(height: 10.0,),
+    SizedBox(height: 20.0,),
       Column(
         children: <Widget>[
           Text(
@@ -51,7 +55,34 @@ class Login extends StatelessWidget {
           )
         ],
       ),
-     SizedBox(height: 10.0),
+    SizedBox(height: 20.0,),
+    Column(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(left: 10.0,right: 15.0),
+          child: Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(25),
+
+            child: DropdownButton(
+
+              value: _selectedUser,
+              items: _dropDownItem(),
+              onChanged: (value) {
+                _selectedUser = value;
+                setState((){});
+              },
+
+              hint:Text( 'Select user type',
+
+              ),
+            ),
+          ),
+        )
+      ],
+    ),
+
+     SizedBox(height: 20.0),
       Column(
         children: <Widget>[
           Padding(
@@ -80,7 +111,9 @@ class Login extends StatelessWidget {
           )
         ],
       ),
-    SizedBox(height: 10.0),
+
+
+    SizedBox(height: 20.0),
     Column(
       children: <Widget>[
         Padding(
@@ -109,7 +142,7 @@ class Login extends StatelessWidget {
         )
       ],
     ),
-    SizedBox(height: 10.0,),
+    SizedBox(height: 20.0,),
     Container(
       child: Row(
         mainAxisAlignment:MainAxisAlignment.center,
@@ -125,6 +158,8 @@ class Login extends StatelessWidget {
       ),
     ),
     SizedBox(height: 10.0,),
+
+
     RaisedButton(
       onPressed: (){},
       color: Colors.blue,
@@ -135,6 +170,17 @@ class Login extends StatelessWidget {
 
 
     ),
+    ),
     );
   }
+}
+
+List<DropdownMenuItem<String>>_dropDownItem(){
+  List<String>ddl=["Admin","Lecturer","Student"];
+  return ddl.map(
+          (value)=>DropdownMenuItem(
+        value: value,
+        child: Text(value),
+      )
+  ).toList();
 }
