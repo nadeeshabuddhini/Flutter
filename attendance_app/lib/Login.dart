@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:attendance_app/Home.dart';
 
 class Login extends StatelessWidget {
   String _selectedUser = null;
@@ -7,7 +8,9 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar:AppBar(
-        title: Text('Sign in'),
+        title: Text('Sign in'
+        ),
+
     ),
     body: Container(
       padding: EdgeInsets.only(left:20.0,top: 30.0),
@@ -70,7 +73,7 @@ class Login extends StatelessWidget {
               items: _dropDownItem(),
               onChanged: (value) {
                 _selectedUser = value;
-                setState((){});
+                //setState((){});
               },
 
               hint:Text( 'Select user type',
@@ -152,6 +155,7 @@ class Login extends StatelessWidget {
             style: TextStyle(
               color: Colors.blue,
               fontSize: 16.0,
+
             ),
           ),
         ],
@@ -161,10 +165,12 @@ class Login extends StatelessWidget {
 
 
     RaisedButton(
-      onPressed: (){},
+      onPressed: (){Navigator.of(context).pushNamed('/Home');},
       color: Colors.blue,
       child: Text('LOGIN'),
+
     ),
+
     ],
     )
 
@@ -172,6 +178,7 @@ class Login extends StatelessWidget {
     ),
     ),
     );
+
   }
 }
 
