@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:st_attendance/student_detail.dart';
 class Home extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class Home extends StatelessWidget{
 
         crossAxisCount: 2,
         children: <Widget>[
-          new Container(
+          new GestureDetector(
             child: new Card(
               elevation: 10.0,
               child: new Column(
@@ -34,6 +35,13 @@ class Home extends StatelessWidget{
                 ],
               ),
             ),
+            onTap:(){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context)=>student_detail())
+              );
+            }
           ),
           new Container(
             child: new Card(
@@ -147,5 +155,4 @@ class Home extends StatelessWidget{
   }
 
 }
-
 
