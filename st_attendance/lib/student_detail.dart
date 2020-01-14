@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_attendance_app/AddTask.dart';
+import 'package:st_attendance_app/AddTask.dart';
 
 
 class student_detail extends StatelessWidget{
