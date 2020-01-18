@@ -1,4 +1,4 @@
-name: st_attendance
+name: student_attendance_app
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -47,7 +47,10 @@ flutter:
    - images/st_attend.jpg
    - images/student2.jpg
    - images/dash.png
-
+   - images/bg1.jpg
+   - images/bg2.jpg
+   - images/bg3.jpg
+   - images/bg4.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
