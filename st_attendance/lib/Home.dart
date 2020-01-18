@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:st_attendance/student_detail.dart';
+import 'package:student_attendance_app/student_detail.dart';
 class Home extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -16,55 +16,65 @@ class Home extends StatelessWidget{
         crossAxisCount: 2,
         children: <Widget>[
           new GestureDetector(
-            child: new Card(
-              elevation: 10.0,
-              child: new Column(
-                children: <Widget>[
-                  new Image.asset("images/student2.jpg",
-                    height: 140.0,
-                    width: 140.0,
-                    fit: BoxFit.cover,),
-                  new SizedBox(height:5.0,
-                  ),
-                  new Text("Student Details",
-                    style:TextStyle(
-                        fontSize:18.0,
-                        color:Colors.black
+              child: new Card(
+                elevation: 10.0,
+                child: new Column(
+                  children: <Widget>[
+                    new Image.asset("images/student2.jpg",
+                      height: 140.0,
+                      width: 140.0,
+                      fit: BoxFit.cover,),
+                    new SizedBox(height:5.0,
                     ),
-                  )
-                ],
+                    new Text("Student Details",
+                      style:TextStyle(
+                          fontSize:18.0,
+                          color:Colors.black
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            onTap:(){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context)=>student_detail())
-              );
-            }
+              onTap:(){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context)=>student_detail())
+                );
+              }
           ),
-          new Container(
-            child: new Card(
-              elevation: 10.0,
-              child: new Column(
-                children: <Widget>[
-                  new Image.asset("images/st_attend.jpg",
-                    height: 140.0,
-                    width: 140.0,
-                    fit: BoxFit.cover,),
-                  new SizedBox(height:5.0,
-                  ),
-                  new Text("Student Attendance",
-                    style:TextStyle(
-                        fontSize:18.0,
-                        color:Colors.black
+
+            new GestureDetector(
+              child: new Card(
+                elevation: 10.0,
+                child: new Column(
+                  children: <Widget>[
+                    new Image.asset("images/st_attend.jpg",
+                      height: 140.0,
+                      width: 140.0,
+                      fit: BoxFit.cover,),
+                    new SizedBox(height:5.0,
                     ),
-                  )
-                ],
+                    new Text("Student Attendance",
+                      style:TextStyle(
+                          fontSize:18.0,
+                          color:Colors.black
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
+
+              onTap:(){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context)=>student_detail())
+                );
+              }
           ),
-          new Container(
+
+          new GestureDetector(
             child: new Card(
               elevation: 10.0,
               child: new Column(
@@ -84,8 +94,15 @@ class Home extends StatelessWidget{
                 ],
               ),
             ),
+              onTap:(){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context)=>student_detail())
+                );
+              }
           ),
-          new Container(
+          new GestureDetector(
             child: new Card(
               elevation: 10.0,
               child: new Column(
@@ -105,8 +122,15 @@ class Home extends StatelessWidget{
                 ],
               ),
             ),
+              onTap:(){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context)=>student_detail())
+                );
+              }
           ),
-          new Container(
+          new GestureDetector(
             child: new Card(
               elevation: 10.0,
               child: new Column(
@@ -126,8 +150,15 @@ class Home extends StatelessWidget{
                 ],
               ),
             ),
+              onTap:(){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context)=>student_detail())
+                );
+              }
           ),
-          new Container(
+          new GestureDetector(
             child: new Card(
               elevation: 10.0,
               child: new Column(
@@ -147,6 +178,13 @@ class Home extends StatelessWidget{
                 ],
               ),
             ),
+              onTap:(){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context)=>student_detail())
+                );
+              }
           ),
 
         ],
