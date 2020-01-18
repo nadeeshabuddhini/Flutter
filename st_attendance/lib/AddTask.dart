@@ -27,22 +27,94 @@ class AddTask extends StatelessWidget{
             ],),
           ),
           Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SingleChildScrollView(
+              child: TextField(
+               decoration: new InputDecoration(
+                 icon: Icon(Icons.dashboard),
+                 hintText: "Index No",
+                 border: InputBorder.none
+               ),
+                style: new TextStyle(fontSize: 20.0,
+                color:Colors.black),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SingleChildScrollView(
+              child: TextField(
+                decoration: new InputDecoration(
+                    icon: Icon(Icons.account_circle),
+                    hintText: "Name",
+                    border: InputBorder.none
+                ),
+                style: new TextStyle(fontSize: 20.0,
+                    color:Colors.black),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SingleChildScrollView(
+              child: TextField(
+                decoration: new InputDecoration(
+                    icon: Icon(Icons.email),
+                    hintText: "Student E-mail",
+                    border: InputBorder.none
+                ),
+                style: new TextStyle(fontSize: 20.0,
+                    color:Colors.black),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SingleChildScrollView(
+              child: TextField(
+                decoration: new InputDecoration(
+                    icon: Icon(Icons.list),
+                    hintText: "Subject",
+                    border: InputBorder.none
+                ),
+                style: new TextStyle(fontSize: 20.0,
+                    color:Colors.black),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SingleChildScrollView(
+              child: TextField(
+                decoration: new InputDecoration(
+                    icon: Icon(Icons.call),
+                    hintText: "Phone No",
+                    border: InputBorder.none
+                ),
+                style: new TextStyle(fontSize: 20.0,
+                    color:Colors.black),
+              ),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.all(16.0),
-            child: TextField(
-             decoration: new InputDecoration(
-               icon: Icon(Icons.dashboard),
-               hintText: "Index No",
-               border: InputBorder.none
-
-
-             ),
-              style: new TextStyle(fontSize: 22.0,
-              color:Colors.black),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.check,size: 40.0,),
+                  onPressed: (){},
+                ),
+                IconButton(
+                  icon: Icon(Icons.close,size: 40.0,),
+                  onPressed: (){},
+                ),
+              ],
             ),
           )
         ],
-        
-      )
+
+      ),
 
     );
   }
