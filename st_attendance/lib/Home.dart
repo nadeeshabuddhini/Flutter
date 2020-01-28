@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_attendance_app/student_detail.dart';
+import 'package:st_attendance/student_detail.dart';
 class Home extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
