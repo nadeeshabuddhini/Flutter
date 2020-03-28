@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:student_attendance/student_detail.dart';
 
-class AddTask extends StatelessWidget{
+class AddTask extends StatefulWidget{
+  @override
+  _AddTaskState createState()=>new _AddTaskState();
+}
+
+class _AddTaskState extends State<AddTask>{
+
   String indexno='';
   String name='';
   String email='';
@@ -15,11 +21,11 @@ class AddTask extends StatelessWidget{
       CollectionReference reference=Firestore.instance.collection('task');
       await reference.add(
         {
-         "Indexno":indexno,
-         "Name":name,
-          "E-mail":email,
-          "Subject":subject,
-          "PhoneNo":phoneno,
+         "indexno":indexno,
+         "name":name,
+          "email":email,
+          "subject":subject,
+          "phoneno":phoneno,
 
         }
       );
