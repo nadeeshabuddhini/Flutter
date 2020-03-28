@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:st_attendance/Home.dart';
+import 'package:student_attendance/Home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Login extends StatelessWidget
 {
   String _selectedUser = null;
+  String _email,_password;
+  final GlobalKey<FormState>_formKey=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white70,
       appBar:AppBar(
         title: Text('Sign in'
         ),
@@ -20,11 +25,12 @@ class Login extends StatelessWidget
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Welcome to',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
+                  'welcome to',
+              style:TextStyle(
+                 fontSize:30.0,
+                fontWeight: FontWeight.bold,
                   ),
+                  
                 ),
                 SizedBox(height: 20.0,),
                 Column(
@@ -54,6 +60,7 @@ class Login extends StatelessWidget
                       style: TextStyle(
                         fontSize: 15.0,
                         fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
 
                       ),
                     )
@@ -183,6 +190,7 @@ class Login extends StatelessWidget
     );
 
   }
+
 
 }
 
