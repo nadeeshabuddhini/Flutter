@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:st_attendance/student_detail.dart';
+import 'package:student_attendance/student_detail.dart';
 
 class AddTask extends StatefulWidget{
   @override
