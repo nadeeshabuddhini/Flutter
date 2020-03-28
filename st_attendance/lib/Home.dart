@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:st_attendance/student_detail.dart';
+import 'package:student_attendance/student_detail.dart';
+import 'package:student_attendance/Course_detail.dart';
 class Home extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,7 @@ class Home extends StatelessWidget{
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context)=>student_detail())
+                        builder: (context)=>Course_detail())
                 );
               }
           ),
