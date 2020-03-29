@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:st_attendance/student_detail.dart';
+import 'package:student_attendance/student_detail.dart';
 
 class EditTask extends StatefulWidget{
   EditTask({this.indexno,this.name,this.email,this.subject,this.phoneno,this.index});
@@ -51,6 +51,12 @@ void editTask(){
   void initState(){
     super.initState();
 
+    indexno=widget.indexno;
+    name=widget.name;
+    email=widget.email;
+    subject=widget.subject;
+    phoneno=widget.phoneno;
+
     controllerindexno=new TextEditingController(text:widget.indexno);
     controllername=new TextEditingController(text:widget.name);
     controlleremail=new TextEditingController(text:widget.email);
@@ -74,19 +80,21 @@ void editTask(){
                     image: AssetImage("images/bg2.jpg"),
                     fit: BoxFit.cover),
               ),
-            ),
 
-            Column(
+
+           child:Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Update Data", style: new TextStyle(
+                Text("Update Student", style: new TextStyle(
                   color: Colors.white,
-                  fontSize: 30.0,
+                  fontSize: 32.0,
                   letterSpacing: 2.0,
                 ),
                 )
               ],
             ),
+           ),
+
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(

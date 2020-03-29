@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:st_attendance/student_detail.dart';
+import 'package:student_attendance/student_detail.dart';
 
 class AddTask extends StatefulWidget{
   @override
@@ -41,29 +41,33 @@ class _AddTaskState extends State<AddTask>{
       body:new SingleChildScrollView(
         child:Column(
           children: <Widget>[
-            Container(
-              height: 200.0,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("images/bg2.jpg"),
-                    fit: BoxFit.cover),
-              ),
-            ),
+                Container(
+                  height: 200.0,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("images/bg2.jpg"),
+                        fit: BoxFit.cover),
+                  ),
 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Add Student", style: new TextStyle(
-                  color: Colors.white,
-                  fontSize: 30.0,
-                  letterSpacing: 2.0,
-                ),
-                )
-              ],
-            ),
+
+                      child:Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                        children:<Widget>[
+                         Text("Add Student", style: new TextStyle(
+                          color: Colors.white,
+                          fontSize: 32.0,
+                          letterSpacing: 2.0,
+                        ),
+                        ),
+                        ],
+                      ),
+                     ),
+
+
+
             Padding(
-              padding: const EdgeInsets.all(10.0),
+               padding:const EdgeInsets.all(10.0),
               child: TextField(
                 onChanged: (String str){
                   setState((){
