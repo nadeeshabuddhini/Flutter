@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:st_attendance/Home.dart';
+import 'package:student_attendance/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -26,19 +26,19 @@ class _LoginState extends State<Login>
       ),
       body:Form(
         key: _formKey,
-          child:Container(
+        child:Container(
           padding: EdgeInsets.only(left:20.0,top: 30.0),
-        child:SingleChildScrollView(
+          child:SingleChildScrollView(
             child:Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'welcome to',
-              style:TextStyle(
-                 fontSize:30.0,
-                fontWeight: FontWeight.bold,
+                  style:TextStyle(
+                    fontSize:30.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                  
+
                 ),
                 SizedBox(height: 20.0,),
                 Column(
@@ -87,21 +87,24 @@ class _LoginState extends State<Login>
 
                         child: DropdownButton(
 
-                         value: _selectedUser,
-                         items: _dropDownItem(),
-                         onChanged: (value) {
+                          value: _selectedUser,
+                          items: _dropDownItem(),
+                          onChanged: (value) {
 
-                         _selectedUser = value;
+                            _selectedUser = value;
 
-                          setState((){});
-                         },
+                              setState(() {
 
-                   hint:Text( 'Select user type',),
-                     ),
-                    ),
+                              });
+
+                          },
+
+                          hint:Text( 'Select user type',),
+                        ),
+                      ),
                     )
-                     ],
-                  ),
+                  ],
+                ),
 
                 SizedBox(height: 20.0),
                 Column(
@@ -110,36 +113,36 @@ class _LoginState extends State<Login>
                       padding: EdgeInsets.only(left: 10.0, right: 15.0),
 
                       child: Material(
-                      elevation: 5.0,
+                        elevation: 5.0,
                         borderRadius: BorderRadius.circular(25),
                         child:TextFormField(
                           validator:(input){
                             if(input.isEmpty){
-                               return 'Please type an email';
+                              return 'Please type an email';
 
                             }
                           } ,
                           onSaved:(input)=>_email=input ,
                           decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Icon(
-                          Icons.email,
-                          color: Colors.grey,
-                          size: 30.0,
-                           ),
-                        contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                      color: Colors.grey
-                          )
-                           ),
+                              border: InputBorder.none,
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.grey,
+                                size: 30.0,
+                              ),
+                              contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
+                              hintText: 'Email',
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              )
+                          ),
 
                         ),
 
-                       ),
+                      ),
                     ),
-                     ],
-                   ),
+                  ],
+                ),
 
 
                 SizedBox(height: 20.0),
@@ -150,35 +153,35 @@ class _LoginState extends State<Login>
                       child: Material(
                         elevation: 5.0,
                         borderRadius: BorderRadius.circular(25),
-                      child: TextFormField(
-                        validator:(input){
-                          if(input.isEmpty){
-                            return 'Please type the password';
-                          }else if(input.length<6){
-                            return 'Your password needs at least 6 characters';
-                          }
-                        } ,
-                         onSaved:(input)=>_password=input ,
-                         decoration: InputDecoration(
-                         border: InputBorder.none,
-                         prefixIcon: Icon(
-                         Icons.vpn_key,
-                         color: Colors.grey,
-                         size: 30.0,
-                         ),
-                      contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
-                    hintText: 'Password',
-                      hintStyle: TextStyle(
-                      color: Colors.grey
-                        )
-                      ),
-                        obscureText: true,
+                        child: TextFormField(
+                          validator:(input){
+                            if(input.isEmpty){
+                              return 'Please type the password';
+                            }else if(input.length<6){
+                              return 'Your password needs at least 6 characters';
+                            }
+                          } ,
+                          onSaved:(input)=>_password=input ,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              prefixIcon: Icon(
+                                Icons.vpn_key,
+                                color: Colors.grey,
+                                size: 30.0,
+                              ),
+                              contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
+                              hintText: 'Password',
+                              hintStyle: TextStyle(
+                                  color: Colors.grey
+                              )
+                          ),
+                          obscureText: true,
                         ),
                       ),
-                   )
+                    )
                   ],
-               ),
-      //form
+                ),
+                //form
 
 
                 SizedBox(height: 20.0,),
@@ -208,25 +211,28 @@ class _LoginState extends State<Login>
               ],
             ),
 
-        ),
+          ),
 
-),
+        ),
       ),
     );
 
   }
-    Future<void>signIn()async{
+  Future<void>signIn()async{
     final formState=_formKey.currentState;
     if(formState.validate()){
       formState.save();
       try{
         await FirebaseAuth.instance.signInWithEmailAndPassword(email:_email, password:_password);
-        Navigator.push(context,MaterialPageRoute(builder:(context)=>Home()));
+        if("Admin"==_selectedUser) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Home()));
+        }
       }catch(e){
         print(e.message);
       }
     }
-}
+  }
 
 }
 
