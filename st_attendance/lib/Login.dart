@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:st_attendance/Home.dart';
+import 'package:student_attendance/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:async/async.dart';
 
-class Login extends StatelessWidget
+class Login extends StatefulWidget{
+  @override
+  _LoginState createState()=>new _LoginState();
+}
+
+class _LoginState extends State<Login>
 {
   String _selectedUser = null;
   String _email,_password;
-  
+  final GlobalKey<FormState>_formKey=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +24,10 @@ class Login extends StatelessWidget
         ),
 
       ),
-      body: Container(
-        padding: EdgeInsets.only(left:20.0,top: 30.0),
+      body:Form(
+        key: _formKey,
+          child:Container(
+          padding: EdgeInsets.only(left:20.0,top: 30.0),
         child:SingleChildScrollView(
             child:Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -66,95 +74,113 @@ class Login extends StatelessWidget
                     )
                   ],
                 ),
-                SizedBox(height: 20.0,),
+
+
+                SizedBox(height: 20.0, ),
                 Column(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 10.0,right: 15.0),
+                      padding: EdgeInsets.only(left: 10.0, right: 15.0),
                       child: Material(
                         elevation: 5.0,
                         borderRadius: BorderRadius.circular(25),
 
                         child: DropdownButton(
 
-                          value: _selectedUser,
-                          items: _dropDownItem(),
-                          onChanged: (value) {
+                         value: _selectedUser,
+                         items: _dropDownItem(),
+                         onChanged: (value) {
 
-                            _selectedUser = value;
+                         _selectedUser = value;
 
-                            //setState((){});
-                          },
+                          setState((){});
+                         },
 
-                          hint:Text( 'Select user type',
-
-                          ),
-                        ),
-                      ),
+                   hint:Text( 'Select user type',),
+                     ),
+                    ),
                     )
-                  ],
-                ),
+                     ],
+                  ),
 
                 SizedBox(height: 20.0),
                 Column(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 10.0,right: 15.0),
-                      child: Material(
-                        elevation: 5.0,
+                      padding: EdgeInsets.only(left: 10.0, right: 15.0),
 
+                      child: Material(
+                      elevation: 5.0,
                         borderRadius: BorderRadius.circular(25),
-                        child: TextFormField(
+                        child:TextFormField(
+                          validator:(input){
+                            if(input.isEmpty){
+                               return 'Please type an email';
+
+                            }
+                          } ,
+                          onSaved:(input)=>_email=input ,
                           decoration: InputDecoration(
-                              border: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.email,
-                                color: Colors.grey,
-                                size: 30.0,
-                              ),
-                              contentPadding:
-                              EdgeInsets.only(left: 15,top:15,bottom: 10),
-                              hintText: 'Email',
-                              hintStyle: TextStyle(
-                                  color: Colors.grey
-                              )
-                          ),
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                          Icons.email,
+                          color: Colors.grey,
+                          size: 30.0,
+                           ),
+                        contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
+                      hintText: 'Email',
+                      hintStyle: TextStyle(
+                      color: Colors.grey
+                          )
+                           ),
+
                         ),
-                      ),
-                    )
-                  ],
-                ),
+
+                       ),
+                    ),
+                     ],
+                   ),
 
 
                 SizedBox(height: 20.0),
                 Column(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 10.0,right: 15.0),
+                      padding: EdgeInsets.only(left: 10.0, right: 15.0),
                       child: Material(
                         elevation: 5.0,
                         borderRadius: BorderRadius.circular(25),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.vpn_key,
-                                color: Colors.grey,
-                                size: 30.0,
-                              ),
-                              contentPadding:
-                              EdgeInsets.only(left: 15,top:15,bottom: 10),
-                              hintText: 'Password',
-                              hintStyle: TextStyle(
-                                  color: Colors.grey
-                              )
-                          ),
-                          obscureText: true,
+                      child: TextFormField(
+                        validator:(input){
+                          if(input.isEmpty){
+                            return 'Please type the password';
+                          }else if(input.length<6){
+                            return 'Your password needs at least 6 characters';
+                          }
+                        } ,
+                         onSaved:(input)=>_password=input ,
+                         decoration: InputDecoration(
+                         border: InputBorder.none,
+                         prefixIcon: Icon(
+                         Icons.vpn_key,
+                         color: Colors.grey,
+                         size: 30.0,
+                         ),
+                      contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
+                    hintText: 'Password',
+                      hintStyle: TextStyle(
+                      color: Colors.grey
+                        )
+                      ),
+                        obscureText: true,
                         ),
                       ),
-                    )
+                   )
                   ],
-                ),
+               ),
+      //form
+
+
                 SizedBox(height: 20.0,),
                 Container(
                   child: Row(
@@ -172,25 +198,35 @@ class Login extends StatelessWidget
                   ),
                 ),
                 SizedBox(height: 10.0,),
-
-
                 RaisedButton(
-                  onPressed: (){Navigator.of(context).pushNamed('/Home');},
+                  onPressed:signIn,
                   color: Colors.blue,
                   child: Text('LOGIN'),
 
                 ),
 
               ],
-            )
-
+            ),
 
         ),
+
+),
       ),
     );
 
   }
-
+    Future<void>signIn()async{
+    final formState=_formKey.currentState;
+    if(formState.validate()){
+      formState.save();
+      try{
+        await FirebaseAuth.instance.signInWithEmailAndPassword(email:_email, password:_password);
+        Navigator.push(context,MaterialPageRoute(builder:(context)=>Home()));
+      }catch(e){
+        print(e.message);
+      }
+    }
+}
 
 }
 
