@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:st_attendance/Login.dart';
-import 'package:st_attendance/Home.dart';
+import 'package:student_attendance/Login.dart';
+import 'package:student_attendance/Home.dart';
 
 
 void main()=> runApp(new MyApp());

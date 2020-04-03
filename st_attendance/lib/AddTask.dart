@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:st_attendance/student_detail.dart';
+import 'package:student_attendance/student_detail.dart';
 
 class AddTask extends StatefulWidget{
   @override
@@ -8,6 +8,8 @@ class AddTask extends StatefulWidget{
 }
 
 class _AddTaskState extends State<AddTask>{
+
+var _formKey=GlobalKey<FormState>();
 
   String indexno='';
   String name='';
@@ -38,7 +40,9 @@ class _AddTaskState extends State<AddTask>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body:new SingleChildScrollView(
+      body:Form(
+        key: _formKey,
+      child:new SingleChildScrollView(
         child:Column(
           children: <Widget>[
                 Container(
@@ -57,6 +61,7 @@ class _AddTaskState extends State<AddTask>{
                          Text("Add Student", style: new TextStyle(
                           color: Colors.white,
                           fontSize: 32.0,
+                          fontWeight: FontWeight.bold,
                           letterSpacing: 2.0,
                         ),
                         ),
@@ -68,7 +73,12 @@ class _AddTaskState extends State<AddTask>{
 
             Padding(
                padding:const EdgeInsets.all(10.0),
-              child: TextField(
+              child: TextFormField(
+                validator: (String value){
+                  if(value.isEmpty){
+                    return 'Please enter Index No ';
+                  }
+                },
                 onChanged: (String str){
                   setState((){
                     indexno=str;
@@ -85,7 +95,12 @@ class _AddTaskState extends State<AddTask>{
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: TextField(
+              child: TextFormField(
+                validator: (String value){
+                  if(value.isEmpty){
+                    return 'Please enter Name ';
+                  }
+                },
                 onChanged: (String str){
                   setState((){
                     name=str;
@@ -102,7 +117,12 @@ class _AddTaskState extends State<AddTask>{
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: TextField(
+              child: TextFormField(
+                validator: (String value){
+                  if(value.isEmpty){
+                    return 'Please enter E-mail address';
+                  }
+                },
                 onChanged: (String str){
                   setState((){
                     email=str;
@@ -119,7 +139,12 @@ class _AddTaskState extends State<AddTask>{
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: TextField(
+              child: TextFormField(
+                validator: (String value){
+                  if(value.isEmpty){
+                    return 'Please enter Subject ';
+                  }
+                },
                 onChanged: (String str){
                   setState((){
                     subject=str;
@@ -136,7 +161,12 @@ class _AddTaskState extends State<AddTask>{
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: TextField(
+              child: TextFormField(
+                validator: (String value){
+                  if(value.isEmpty){
+                    return 'Please enter Phone No';
+                  }
+                },
                 onChanged: (String str){
                   setState((){
                     phoneno=str;
@@ -159,13 +189,19 @@ class _AddTaskState extends State<AddTask>{
                   IconButton(
                     icon: Icon(Icons.check, size: 40.0,),
                     onPressed: () {
-                      _addData();
+                      setState(() {
+                        if(_formKey.currentState.validate()){
+                          _addData();
+                        }
+                      });
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.close, size: 40.0,),
                     onPressed: () {
-                      Navigator.pop(context);
+                          Navigator.pop(context);
+
+
                     },
                   ),
                 ],
@@ -176,6 +212,7 @@ class _AddTaskState extends State<AddTask>{
           ],
 
         ),
+      ),
       ),
     );
   }//build widget

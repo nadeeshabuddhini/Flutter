@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:st_attendance/AddTask.dart';
+import 'package:student_attendance/AddTask.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:st_attendance/EditTask.dart';
+import 'package:student_attendance/EditTask.dart';
 
 class student_detail extends StatefulWidget{
   @override
@@ -83,11 +83,11 @@ class TaskList extends StatelessWidget{
                     await transaction.get(document[i].reference);
                     await transaction.delete(snapshot.reference);
               }
-              );
-              Scaffold.of(context).showSnackBar(
-                  new SnackBar(content: new Text("Data Deleted"),)
+          );
+          Scaffold.of(context).showSnackBar(
+              new SnackBar(content: new Text("Data Deleted"),)
 
-              );
+          );
             },
             child: Padding(
                 padding: const EdgeInsets.only(left:16.0,top: 8.0,right: 16.0,bottom: 8.0),
@@ -122,6 +122,7 @@ class TaskList extends StatelessWidget{
                                   ),
                                   new Expanded(child: Text(email,style: new TextStyle(fontSize: 18.0,letterSpacing: 1.0),)),
                                 ],
+
                               ),
 
                               new Row(
