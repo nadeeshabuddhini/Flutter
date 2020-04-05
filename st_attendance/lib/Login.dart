@@ -9,33 +9,33 @@ class Login extends StatefulWidget{
   _LoginState createState()=>new _LoginState();
 }
 
-class _LoginState extends State<Login>
-{
+class _LoginState extends State<Login> {
+
   String _selectedUser = null;
-  String _email,_password;
-  final GlobalKey<FormState>_formKey=GlobalKey<FormState>();
+  String _email, _password;
+  final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      appBar:AppBar(
+      appBar: AppBar(
         title: Text('Sign in'
         ),
 
       ),
-      body:Form(
+      body: Form(
         key: _formKey,
-        child:Container(
-          padding: EdgeInsets.only(left:20.0,top: 30.0),
-          child:SingleChildScrollView(
-            child:Column(
+        child: Container(
+          padding: EdgeInsets.only(left: 20.0, top: 30.0),
+          child: SingleChildScrollView(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'welcome to',
-                  style:TextStyle(
-                    fontSize:30.0,
+                  style: TextStyle(
+                    fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                   ),
 
@@ -51,10 +51,11 @@ class _LoginState extends State<Login>
                           borderRadius: BorderRadius.circular(50),
                           border: Border.all(
                               color: Colors.black,
-                              style:BorderStyle.solid,
+                              style: BorderStyle.solid,
                               width: 5.0
                           ),
-                          image: DecorationImage(image: AssetImage('images/logo.png'),
+                          image: DecorationImage(
+                            image: AssetImage('images/logo.png'),
                           )
                       ),
                     ),
@@ -76,7 +77,7 @@ class _LoginState extends State<Login>
                 ),
 
 
-                SizedBox(height: 20.0, ),
+                SizedBox(height: 20.0,),
                 Column(
                   children: <Widget>[
                     Padding(
@@ -90,16 +91,14 @@ class _LoginState extends State<Login>
                           value: _selectedUser,
                           items: _dropDownItem(),
                           onChanged: (value) {
-
                             _selectedUser = value;
 
-                              setState(() {
+                            setState(() {
 
-                              });
-
+                            });
                           },
 
-                          hint:Text( 'Select user type',),
+                          hint: Text('Select user type',),
                         ),
                       ),
                     )
@@ -115,14 +114,13 @@ class _LoginState extends State<Login>
                       child: Material(
                         elevation: 5.0,
                         borderRadius: BorderRadius.circular(25),
-                        child:TextFormField(
-                          validator:(input){
-                            if(input.isEmpty){
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input.isEmpty) {
                               return 'Please type an email';
-
                             }
-                          } ,
-                          onSaved:(input)=>_email=input ,
+                          },
+                          onSaved: (input) => _email = input,
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
@@ -130,7 +128,8 @@ class _LoginState extends State<Login>
                                 color: Colors.grey,
                                 size: 30.0,
                               ),
-                              contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, top: 15, bottom: 10),
                               hintText: 'Email',
                               hintStyle: TextStyle(
                                   color: Colors.grey
@@ -154,14 +153,14 @@ class _LoginState extends State<Login>
                         elevation: 5.0,
                         borderRadius: BorderRadius.circular(25),
                         child: TextFormField(
-                          validator:(input){
-                            if(input.isEmpty){
+                          validator: (input) {
+                            if (input.isEmpty) {
                               return 'Please type the password';
-                            }else if(input.length<6){
+                            } else if (input.length < 6) {
                               return 'Your password needs at least 6 characters';
                             }
-                          } ,
-                          onSaved:(input)=>_password=input ,
+                          },
+                          onSaved: (input) => _password = input,
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
@@ -169,7 +168,8 @@ class _LoginState extends State<Login>
                                 color: Colors.grey,
                                 size: 30.0,
                               ),
-                              contentPadding: EdgeInsets.only(left: 15, top:15, bottom: 10),
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, top: 15, bottom: 10),
                               hintText: 'Password',
                               hintStyle: TextStyle(
                                   color: Colors.grey
@@ -187,7 +187,7 @@ class _LoginState extends State<Login>
                 SizedBox(height: 20.0,),
                 Container(
                   child: Row(
-                    mainAxisAlignment:MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         "Forgot Password?",
@@ -202,7 +202,7 @@ class _LoginState extends State<Login>
                 ),
                 SizedBox(height: 10.0,),
                 RaisedButton(
-                  onPressed:signIn,
+                  onPressed: signIn,
                   color: Colors.blue,
                   child: Text('LOGIN'),
 
@@ -216,33 +216,39 @@ class _LoginState extends State<Login>
         ),
       ),
     );
-
   }
-  Future<void>signIn()async{
-    final formState=_formKey.currentState;
-    if(formState.validate()){
+
+  Future<void> signIn() async {
+    final formState = _formKey.currentState;
+    if (formState.validate()) {
       formState.save();
-      try{
-        await FirebaseAuth.instance.signInWithEmailAndPassword(email:_email, password:_password);
-        if("Admin"==_selectedUser) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Home()));
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _email, password: _password).then((onValue) {
+          print('done');
+          print(_selectedUser);
+          if ("Admin" == _selectedUser) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          }
+        }).catchError((onError) {
+          print(onError + " " + "errorr");
         }
-      }catch(e){
+        );
+      } catch (e) {
         print(e.message);
       }
     }
   }
 
 }
-
-
-List<DropdownMenuItem<String>>_dropDownItem(){
-  List<String>ddl=["Admin","Lecturer","Student"];
-  return ddl.map(
-          (value)=>DropdownMenuItem(
-        value: value,
-        child: Text(value),
-      )
-  ).toList();
-}
+  List<DropdownMenuItem<String>> _dropDownItem() {
+    List<String>ddl = ["Admin", "Lecturer", "Student"];
+    return ddl.map(
+            (value) =>
+            DropdownMenuItem(
+              value: value,
+              child: Text(value),
+            )
+    ).toList();
+  }
