@@ -17,10 +17,10 @@ class _ExampleState extends State<Example>{
   void _addData(){
     Firestore.instance.runTransaction((Transaction transaction)
     async{
-      CollectionReference reference=Firestore.instance.collection('selectedDep');
+      CollectionReference reference=Firestore.instance.collection('department');
         await reference.add(
             {
-              "department":selectedDep,
+              
               "subCode":subCode,
               "subject":subject,
 
