@@ -8,6 +8,9 @@ class Example extends StatefulWidget{
 }
 
 class _ExampleState extends State<Example>{
+
+  String _selectedYear = null;
+  String _selectedSem=null;
   var selectedDep;
   var _formKey=GlobalKey<FormState>();
 
@@ -17,10 +20,10 @@ class _ExampleState extends State<Example>{
   void _addData(){
     Firestore.instance.runTransaction((Transaction transaction)
     async{
-      CollectionReference reference=Firestore.instance.collection('department');
+      CollectionReference reference=Firestore.instance.collection('DepDetails').document(selectedDep).collection(_selectedYear).document(_selectedSem).collection('courses');
         await reference.add(
             {
-              
+
               "subCode":subCode,
               "subject":subject,
 
@@ -100,7 +103,7 @@ class _ExampleState extends State<Example>{
                             });
                         },
 
-                          hint: Text('Select the department'),
+                          hint: Text('Department'),
                         ),
                       ],
                     );
@@ -108,10 +111,49 @@ class _ExampleState extends State<Example>{
                 },
               ),
 
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    DropdownButton(
+
+
+                      value: _selectedYear,
+                      items: _dropDownItem1(),
+                      onChanged: (value) {
+                        _selectedYear = value;
+
+                        setState(() {
+
+                        });
+                      },
+
+                      hint: Text('Year',),
+                    ),
+                    DropdownButton(
+
+
+                      value: _selectedSem,
+                      items: _dropDownItem2(),
+                      onChanged: (value) {
+                        _selectedSem = value;
+
+                        setState(() {
+
+                        });
+                      },
+
+                      hint: Text('Semester',),
+                    ),
+                  ],
+                ),
+              ),
+
 
 
               Padding(
-                padding: const EdgeInsets.only(top:40.0,left:10.0),
+                padding: const EdgeInsets.only(top:10.0,left:10.0),
                 child: TextFormField(
                   validator: (String value){
                     if(value.isEmpty){
@@ -191,3 +233,24 @@ class _ExampleState extends State<Example>{
     );
   }//build widget
 }//stateless
+
+List<DropdownMenuItem<String>> _dropDownItem1() {
+  List<String>ddl = ["Year 1", "Year 2", "Year 3","Year 4"];
+  return ddl.map(
+          (value) =>
+          DropdownMenuItem(
+            value: value,
+            child: Text(value),
+          )
+  ).toList();
+}
+List<DropdownMenuItem<String>> _dropDownItem2() {
+  List<String>ddl = ["Semester 1", "Semester 2"];
+  return ddl.map(
+          (value) =>
+          DropdownMenuItem(
+            value: value,
+            child: Text(value),
+          )
+  ).toList();
+}

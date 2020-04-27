@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:st_attendance/Example.dart';
+import 'package:student_attendance/Example.dart';
 
 class Example_detail extends StatefulWidget{
   @override
@@ -63,8 +63,9 @@ class Course_detailState extends State<Example_detail>{
                     },
                   );
 
+                }else {
+                  return null;
                 }
-
               }
             ),
           ),
@@ -72,7 +73,8 @@ class Course_detailState extends State<Example_detail>{
       ),
     );
   }
-  }
+}
+
 
 
 
